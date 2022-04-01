@@ -1,0 +1,132 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+
+#define DEFAULT 	0
+#define NUMS   		1
+#define SYMBOLS   	2
+#define TEXTNAV   	3
+
+&left_encoder 	{ resolution = <1>; };
+&right_encoder 	{ resolution = <1>; };
+
+// make this behave like ignore-mod-tap-interrupt on QMK
+
+&mt {    
+	tapping-term-ms = <200>;
+	flavor = "tap-preferred";
+};
+
+// transparent template for new layers
+//			bindings = <
+//	&trans   &trans &trans &trans &trans &trans                                                &trans   &trans &trans &trans &trans &trans 
+//	&trans   &trans &trans &trans &trans &trans                                               &trans   &trans &trans &trans &trans &trans 
+//	&trans   &trans &trans &trans &trans &trans &kp LSHFT &kp LSHFT        &kp LSHFT &kp LSHFT &trans   &trans &trans &trans &trans &trans 
+//	                 &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans
+//			>;
+
+#define AS(keycode) &as LS(keycode) keycode
+
+/ {
+	    behaviors {
+            as: auto_shift {
+                compatible = "zmk,behavior-hold-tap";
+                label = "AUTO_SHIFT";
+                #binding-cells = <2>;
+                tapping_term_ms = <135>;
+                quick_tap_ms = <0>;
+                flavor = "tap-preferred";
+                bindings = <&kp>, <&kp>;
+            };
+        };
+
+
+    combos {
+        compatible = "zmk,combos";
+        combo_left {
+            timeout-ms = <50>;
+            key-positions = <30 43>;
+            bindings = <&kp LEFT>;
+        };
+		combo_right {
+            timeout-ms = <50>;
+            key-positions = <31 44>;
+            bindings = <&kp RIGHT>;
+        };
+		combo_down {
+            timeout-ms = <50>;
+            key-positions = <32 45>;
+            bindings = <&kp DOWN>;
+        };
+		combo_up {
+            timeout-ms = <50>;
+            key-positions = <33 46>;
+            bindings = <&kp UP>;
+        };
+		combo_bt_clear {
+            timeout-ms = <50>;
+            key-positions = <30 31 32 33>;
+            bindings = <&bt BT_CLR>;
+        };
+    };
+
+	keymap {
+		compatible = "zmk,keymap";
+
+		default_layer {
+// ---------------------------------------------------------------------------------------------------------------------------------
+// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   -  |
+// |  ESC  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
+// | LAYER |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | L SHIFT | L SHIFT |  N   |  M    |  ,    |  .   |   /   | LAYER |
+//                     | GUI  | LAYER()  | BSPC  |  ENTER  |   ESC   |  |   RET   |  LAYER  | SPACE  | LAYER  | R-ALT |
+			bindings = <
+	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                                				&kp Y &kp U  &kp I     &kp O   &kp P    &kp MINUS
+	&kp ESC   &kp A &kp S &kp D &kp F &kp G                                                				&kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
+	&lt SYMBOLS LC(UP) &mt LSHFT Z &mt LALT X &kp C &mt LCTRL V &mt LGUI B &kp LSHFT &kp LSHFT        	&kp LSHFT &kp LSHFT &kp N &mt RCTRL M  &mt RGUI COMMA &mt RALT DOT &mt RSHFT FSLH &lt SYMBOLS LC(DOWN)
+	                 &kp ENTER &lt NUMS LPAR &kp BSPC &kp ENTER &kp LA(BSPC)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN
+			>;
+
+			sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp UP DOWN>;
+		};
+
+		numeric_layer {
+			bindings = <
+	&kp LG(LS(N4))   &kp N1 &kp N2 &kp N3 &kp N4 &kp N5                                                          &kp N6 &kp N7 &kp N8 &kp N9 &kp N0 &kp PIPE 
+	&to DEFAULT   &kp LEFT &kp UP &kp DOWN &kp RIGHT &kp PLUS                                               &kp EQUAL   &kp N4 &kp N5 &kp N6 &kp BSLH &trans 
+	&kp LBKT   &kp LBRC &kp TILDE &kp GRAVE &trans &trans &kp LSHFT &kp LSHFT        &kp LSHFT &kp LSHFT &trans   &kp N1 &kp N2 &kp N3 &kp RBRC &kp RBKT 
+	                 &trans &kp LS(ENTER) &kp LEFT &kp RIGHT &trans        			&trans &kp DOWN &kp UP &kp N0 &kp C_MUTE
+			>;
+
+			sensor-bindings = <&inc_dec_kp LG(TAB) LG(LS(TAB)) &inc_dec_kp C_VOL_UP C_VOL_DN>;
+		};
+
+		symbols_layer {
+			bindings = <
+	&trans   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT               &kp CARET   &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans 
+	&to DEFAULT   &trans &trans &trans &trans &trans                                               &trans   &trans &trans &trans &trans &trans 
+	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &trans   &trans &trans &trans &trans &trans 
+	                 &trans &trans &bt BT_SEL 0 &trans &trans        &trans &trans &trans &trans &trans
+			>;
+
+			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
+		};
+
+		textnav_layer {
+			bindings = <
+	&trans   &trans &trans &trans &trans &trans                                                &trans   &trans &trans &trans &trans &trans 
+	&to 0   &kp HOME &kp PG_UP &kp PG_DN &kp END &trans                                               &trans   &trans &trans &trans &trans &trans 
+	&trans   &kp DEL &trans &trans &kp INS &trans &kp LSHFT &kp LSHFT        &kp LSHFT &kp LSHFT &trans   &kp RCTRL &kp RGUI &kp RALT &kp RSHFT &trans 
+	                 &kp LG(X) &trans &trans &trans &trans        				&trans &trans &trans &trans &kp LG(X)
+			>;
+
+			sensor-bindings = <&inc_dec_kp LS(LA(LEFT)) LS(LA(RIGHT)) &inc_dec_kp LS(UP) LS(DOWN)>;
+		};
+	};
+
+	};

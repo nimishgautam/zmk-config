@@ -19,7 +19,7 @@
 // make this behave like ignore-mod-tap-interrupt on QMK
 
 &mt {    
-	tapping-term-ms = <200>;
+	tapping-term-ms = <300>;
 	flavor = "tap-preferred";
 };
 
@@ -35,6 +35,8 @@
 //	                 &trans &trans &trans &trans &trans        &trans &trans &trans &trans &trans
 //			>;
 
+//&mt LGUI F
+
 #define AS(keycode) &as LS(keycode) keycode
 
 / {
@@ -48,6 +50,16 @@
                 flavor = "tap-preferred";
                 bindings = <&kp>, <&kp>;
             };
+
+			mtaf: modtap_f{
+				compatible = "zmk,behavior-hold-tap";
+                label = "autoshiftmodtab";
+                #binding-cells = <2>;
+                tapping_term_ms = <200>;
+                quick_tap_ms = <0>;
+                flavor = "tap-preferred";
+                bindings = <&as>, <&kp>;
+			};
         };
 
 
@@ -90,7 +102,7 @@
 // | LAYER |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | L SHIFT | L SHIFT |  N   |  M    |  ,    |  .   |   /   | LAYER |
 //                     | GUI  | LAYER()  | BSPC  |  ENTER  |   ESC   |  |   RET   |  LAYER  | SPACE  | LAYER  | R-ALT |
 			bindings = <
-	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                                				&kp Y &kp U  &kp I     &kp O   &kp P    &kp MINUS
+	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                                				&kp Y &kp U  &kp I  &kp O   &kp P    &kp MINUS
 	&kp ESC   &mt LCTRL A &mt LALT S &mt LSHFT D &mt LGUI F &kp G                                       &kp H &mt RGUI J  &mt RSHFT K  &mt RALT L   &mt RCTRL SEMI &kp SQT
 	&lt SYMBOLS LC(UP) &kp Z &kp X &kp C &kp V &kp B &caps_word &kp LSHFT        	&kp LSHFT &caps_word &kp N &kp M &kp COMMA &kp DOT &kp FSLH &lt SYMBOLS LC(DOWN)
 	                 &kp ENTER &lt NUMS LPAR &kp BSPC &kp ENTER &kp LA(BSPC)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN

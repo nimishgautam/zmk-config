@@ -96,7 +96,7 @@
 	                 &kp ENTER &lt NUMS LPAR &kp BSPC &kp ENTER &kp LA(BSPC)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN
 			>;
 
-			sensor-bindings = <&inc_dec_kp RIGHT LEFT &inc_dec_kp UP DOWN>;
+			sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
 		};
 
 		numeric_layer {
@@ -107,7 +107,7 @@
 	                 &trans &kp LS(ENTER) &kp LEFT &kp RIGHT &trans        			&trans &kp DOWN &kp UP &kp N0 &kp C_MUTE
 			>;
 
-			sensor-bindings = <&inc_dec_kp LG(TAB) LG(LS(TAB)) &inc_dec_kp C_VOL_UP C_VOL_DN>;
+			sensor-bindings = <&inc_dec_kp LG(TAB) LG(LS(TAB)) &inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 
 		symbols_layer {

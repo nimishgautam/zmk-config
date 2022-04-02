@@ -23,6 +23,10 @@
 	flavor = "tap-preferred";
 };
 
+&caps_word {  
+	continue-list = <UNDERSCORE MINUS>;
+};
+
 // transparent template for new layers
 //			bindings = <
 //	&trans   &trans &trans &trans &trans &trans                                                &trans   &trans &trans &trans &trans &trans 
@@ -39,7 +43,7 @@
                 compatible = "zmk,behavior-hold-tap";
                 label = "AUTO_SHIFT";
                 #binding-cells = <2>;
-                tapping_term_ms = <135>;
+                tapping_term_ms = <175>;
                 quick_tap_ms = <0>;
                 flavor = "tap-preferred";
                 bindings = <&kp>, <&kp>;
@@ -87,8 +91,8 @@
 //                     | GUI  | LAYER()  | BSPC  |  ENTER  |   ESC   |  |   RET   |  LAYER  | SPACE  | LAYER  | R-ALT |
 			bindings = <
 	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                                				&kp Y &kp U  &kp I     &kp O   &kp P    &kp MINUS
-	&kp ESC   &kp A &kp S &kp D &kp F &kp G                                                				&kp H &kp J  &kp K     &kp L   &kp SEMI &kp SQT
-	&lt SYMBOLS LC(UP) &mt LSHFT Z &mt LALT X &kp C &mt LCTRL V &mt LGUI B &kp LSHFT &kp LSHFT        	&kp LSHFT &kp LSHFT &kp N &mt RCTRL M  &mt RGUI COMMA &mt RALT DOT &mt RSHFT FSLH &lt SYMBOLS LC(DOWN)
+	&kp ESC   &mt LCTRL A &mt LALT S &mt LGUI D &mt LSHFT F &kp G                                       &kp H &mt RSFT J  &mt RGUI K  &mt RALT L   &mt RCTRL SEMI &kp SQT
+	&lt SYMBOLS LC(UP) &kp Z &kp X &kp C &kp V &kp B &caps_word &kp LSHFT        	&kp LSHFT &caps_word &kp N &kp M &kp COMMA &kp DOT &kp FSLH &lt SYMBOLS LC(DOWN)
 	                 &kp ENTER &lt NUMS LPAR &kp BSPC &kp ENTER &kp LA(BSPC)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN
 			>;
 
@@ -119,7 +123,7 @@
 
 		textnav_layer {
 			bindings = <
-	&trans   &trans &trans &trans &trans &trans                                                &trans   &trans &trans &trans &trans &trans 
+	&kp LC(LG(Q))   &trans &trans &trans &trans &trans                                                &trans   &trans &trans &trans &trans &trans 
 	&to 0   &kp HOME &kp PG_UP &kp PG_DN &kp END &trans                                               &trans   &trans &trans &trans &trans &trans 
 	&trans   &kp DEL &trans &trans &kp INS &trans &kp LSHFT &kp LSHFT        &kp LSHFT &kp LSHFT &trans   &kp RCTRL &kp RGUI &kp RALT &kp RSHFT &trans 
 	                 &kp LG(X) &trans &trans &trans &trans        				&trans &trans &trans &trans &kp LG(X)

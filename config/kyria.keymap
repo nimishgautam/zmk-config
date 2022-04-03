@@ -85,7 +85,7 @@
 		combo_disable_as {
             timeout-ms = <50>;
             key-positions = <41 48>;
-            bindings = <&bt BT_CLR>;
+            bindings = <&tog AS_OFF>;
 			layers = <0>;
         };
 

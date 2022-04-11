@@ -113,7 +113,7 @@
 			bindings = <
 	&kp TAB   AS(Q) AS(W) AS(E) AS(R) AS(T)                                            AS(Y) AS(U)  FAS(I)  AS(O)   AS(P)    &kp MINUS
 	&kp ESC   AS(A) AS(S) AS(D) AS(F) AS(G)                                            AS(H) AS(J)  AS(K)  AS(L)   AS(SEMI) AS(SQT)
-	&lt SYMBOLS LC(UP) AS(Z) AS(X) AS(C) AS(V) AS(B) &caps_word &kp LSHFT        	&kp LSHFT &caps_word AS(N) AS(M) &kp COMMA &as EXCL DOT AS(FSLH) &lt SYMBOLS LC(DOWN)
+	&lt SYMBOLS LC(UP) AS(Z) AS(X) AS(C) AS(V) AS(B) &caps_word &kp LSHFT        	&kp LSHFT &kp RALT AS(N) AS(M) &kp COMMA &as EXCL DOT AS(FSLH) &lt SYMBOLS LC(DOWN)
 	                 &kp LA(BSPC) &lt NUMS LPAR &kp BSPC &kp ENTER &kp LS(ENTER)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN
 			>;
 

@@ -20,7 +20,7 @@
 // make this behave like ignore-mod-tap-interrupt on QMK
 
 &mt {    
-	tapping-term-ms = <300>;
+	tapping-term-ms = <225>;
 	flavor = "tap-preferred";
 };
 
@@ -136,6 +136,7 @@
 
 			sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
 		};
+
 
 
 		numeric_layer {

@@ -154,7 +154,7 @@
 			bindings = <
 	&trans   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT               &kp CARET   &kp AMPS &kp STAR &kp LPAR &kp RPAR &trans 
 	&to DEFAULT   &trans &trans &trans &trans &trans                                               &trans   &trans &trans &trans &trans &trans 
-	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &trans   &trans &trans &trans &trans &trans 
+	&trans   &kp LC(LA(LS(L))) &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &trans   &trans &trans &trans &kp LC(LA(LS(R))) &trans 
 	                 &trans &trans &bt BT_SEL 0 &trans &trans        &trans &trans &trans &trans &trans
 			>;
 

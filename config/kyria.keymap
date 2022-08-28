@@ -56,6 +56,20 @@
                 flavor = "balanced";
                 bindings = <&kp>, <&to>;
             };
+			td_left_mac: tap_dance_left_mac {
+            	compatible = "zmk,behavior-tap-dance";
+            	label = "TAP_DANCE_LEFT_MAC";
+            	#binding-cells = <0>;
+            	tapping-term-ms = <200>;
+            	bindings = <&kp LC(LEFT)>, <&kp CARET>;
+        	};
+			td_right_mac: tap_dance_right_mac {
+            	compatible = "zmk,behavior-tap-dance";
+            	label = "TAP_DANCE_RIGHT_MAC";
+            	#binding-cells = <0>;
+            	tapping-term-ms = <200>;
+            	bindings = <&kp LC(RIGHT)>, <&kp DOLLAR>;
+        	};
         };
 
 
@@ -145,9 +159,9 @@
 
 		textnav_layer {
 			bindings = <
-	&kp LC(LG(Q))   &kp PG_UP &kp HOME &kp UP &kp END &kp CARET                                              &kp DOLLAR &kp PG_UP &kp LC(LG(SPACE)) &trans &trans &trans 
-	&to DEFAULT   &trans &kp LEFT &kp DOWN &kp RIGHT &kp CAPS                                              &kp LEFT   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &trans 
-	&kp INS   &trans &kp LS(LC(LEFT)) &kp PG_DN &kp LS(LC(RIGHT))  &trans &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &trans &trans &trans &trans 
+	&kp LC(LG(Q))   &kp PSCRN &kp LS(LC(LEFT)) &kp UP &kp LS(LC(RIGHT)) &td_left_mac                        &td_right_mac &kp PG_UP &kp LC(LG(SPACE)) &trans &trans &trans 
+	&to DEFAULT   &kp LA(LEFT) &kp LEFT &kp DOWN &kp RIGHT &kp LA(RIGHT)                                              &kp LEFT   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &kp CAPS 
+	&kp INS   &trans &kp LS(LA(LEFT)) &kp PG_DN &kp LS(LA(RIGHT))  &kp PG_UP &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &kp HOME &kp END &trans &trans 
 	                 &kp LG(X) &kp DEL &kp LA(BSPC) &trans &trans        				&trans &trans &trans &trans &kp LG(X)
 			>;
 

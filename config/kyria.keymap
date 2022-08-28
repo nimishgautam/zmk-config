@@ -145,10 +145,10 @@
 
 		textnav_layer {
 			bindings = <
-	&kp LC(LG(Q))   &kp END &kp HOME &kp UP &kp PG_UP &kp CARET                                              &kp DOLLAR &kp PG_UP &kp LC(LG(SPACE)) &trans &trans &trans 
+	&kp LC(LG(Q))   &kp PG_UP &kp HOME &kp UP &kp END &kp CARET                                              &kp DOLLAR &kp PG_UP &kp LC(LG(SPACE)) &trans &trans &trans 
 	&to DEFAULT   &trans &kp LEFT &kp DOWN &kp RIGHT &kp CAPS                                              &kp LEFT   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &trans 
-	&kp INS   &trans &kp LS(LC(LEFT)) &trans &kp LS(LC(RIGHT))  &trans &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &trans &trans &trans &trans 
-	                 &kp LG(X) &kp DEL &kp LA(BSPC) &kp PG_DN &trans        				&trans &trans &trans &trans &kp LG(X)
+	&kp INS   &trans &kp LS(LC(LEFT)) &kp PG_DN &kp LS(LC(RIGHT))  &trans &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &trans &trans &trans &trans 
+	                 &kp LG(X) &kp DEL &kp LA(BSPC) &trans &trans        				&trans &trans &trans &trans &kp LG(X)
 			>;
 
 			sensor-bindings = <&inc_dec_kp LS(LA(LEFT)) LS(LA(RIGHT)) &inc_dec_kp LS(UP) LS(DOWN)>;

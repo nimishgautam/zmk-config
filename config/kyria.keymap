@@ -139,7 +139,7 @@
 			bindings = <
 	&kp LG(LS(N4))   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT                                        &kp CARET &kp N7 &kp N8 &kp N9 &trans &kp PIPE 
 	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &kp PLUS                                               &kp EQUAL   &kp N4 &kp N5 &kp N6 &kp BSLH &trans 
-	&kp LBRC   &kp LBKT &kp TILDE &kp GRAVE &trans &kp AMPS &trans &trans                  &trans &trans &trans &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
+	&kp LBRC   &kp LBKT &kp TILDE &kp GRAVE &kp LG(LA(LS(V))) &kp AMPS &trans &trans                  &trans &trans &trans &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
 	                 &trans &trans &trans &trans &trans        			&trans &trans &kp UNDERSCORE &kp N0 &kp C_MUTE
 			>;
 

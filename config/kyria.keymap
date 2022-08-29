@@ -61,14 +61,14 @@
             	label = "TAP_DANCE_LEFT_MAC";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
-            	bindings = <&kp LC(LEFT)>, <&kp CARET>;
+            	bindings = <&kp LG(LEFT)>, <&kp CARET>;
         	};
 			td_right_mac: tap_dance_right_mac {
             	compatible = "zmk,behavior-tap-dance";
             	label = "TAP_DANCE_RIGHT_MAC";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
-            	bindings = <&kp LC(RIGHT)>, <&kp DOLLAR>;
+            	bindings = <&kp LG(RIGHT)>, <&kp DOLLAR>;
         	};
         };
 

@@ -14,19 +14,83 @@
 #define TEXTNAV   	3
 #define FNLAYER   	4
 
+// Key defines for easier reading
+
+// Windowing System Shorcuts -- Mac-based but can be easily reprogrammed on Linux to mean these things
+
+#define SCREENSHOT      LG(LS(N4)) //screenshot
+#define FINDER          LG(LA(SPACE)) //open the search bar for finding apps, docs in-computer, etc
+#define SHOW_WINDOWS    LC(UP) //'Expose' on Mac, overview on linux. Just all the windows
+#define WINDOW_LEFT 	LC(LG(LS(LEFT))) //custom shortcut for this feature -- make window take up 50% left screen (using gui and ctl to make it os agnostic)
+#define WINDOW_RIGHT 	LC(LG(LS(RIGHT))) //custom shortcut for this feature -- make window take up 50% right screen (using gui and ctl to make it os agnostic)/fully custom shortcut, using ctl and gui keys so will need them both irrespective of os
+#define SHOW_APP_WINDOWS LC(DOWN) 
+#define LOCK_SCREEN     LC(LG(Q)) //manually set this on linux to match osx default
+#define EMOJI_KBD       LC(LG(SPACE)) //manually set this on linux to match osx default, with 'emote' on linux and a custom shortcut (probably better to use compose feature)
+#define APP_LEFT		LG(TAB)
+#define APP_RIGHT		LS(LG(TAB))
+#define CALCULATOR      RS(LG(LC(FSLH))) // arbitrary shortcut
+
+// Terminal Shortcuts, should be the same in mac and linux
+
+#define MOVE_LEFT_TERMINAL LA(LEFT) //move cursor one word left on the terminal... does not work if .inputrc is set to use vim bindings!
+#define MOVE_RIGHT_TERMINAL LA(RIGHT) //move cursor one word left on the terminal... does not work if .inputrc is set to use vim bindings!
+#define DEL_WORD_TERMINAL LA(BSPC) // delete one word back on terminal ... does not work if .inputrc is set to use vim bindings!
+
+// Linux-based
+
+#define COMPOSE_KEY    SLCK //manually set on linux, to create chars via .Xcompose ()
+
+#define DEL_WORD_L 			LA(BSPC)//delete a word
+#define SELECT_LEFT_WD_L 	LS(LC(LEFT))// select word left of cursor
+#define SELECT_RIGHT_WD_L 	LS(LC(RIGHT))// select word right of cursor
+#define SELECT_LEFT_LINE_L 	LS(HOME)// select all from left of cursor to beginning of line
+#define SELECT_RIGHT_LINE_L LS(END)// select all from right of cursor to end of line
+#define MOVE_LEFT_WD_L 		LC(LEFT)// move one word to the left
+#define MOVE_RIGHT_WD_L 	LC(RIGHT)// move one word to the right
+#define MOVE_LEFT_LINE_L 	HOME// move to beginning of line
+#define MOVE_RIGHT_LINE_L 	END// move to end of line
+#define PASTE_NOSTYLE_L 	LC(LS(V))// paste without formatting
+#define MOVE_BEGIN_LINE_TERMINAL_L HOME// move to the beginning of the line in the terminal
+#define MOVE_END_LINE_TERMINAL_L END// move to the end of the line in the terminal
+
+#define CUT_L	LC(X)
+// Mac-based
+
+#define SHOW_APP_WINDOWS LC(DOWN) 
+#define EURO_MAC            LA(LS(N2))
+#define COMPOSE_MAC    F13 // using some mac tricks to get this to work as xcompose
+
+#define DEL_WORD_M 			LA(BSPC)//delete a word
+#define SELECT_LEFT_WD_M 	LS(LA(LEFT))// select word left of cursor
+#define SELECT_RIGHT_WD_M 	LS(LA(RIGHT))// select word right of cursor
+#define SELECT_LEFT_LINE_M 	LS(LC(LEFT))// select all from left of cursor to beginning of line
+#define SELECT_RIGHT_LINE_M LS(LC(RIGHT))// select all from right of cursor to end of line
+#define MOVE_LEFT_WD_M 		LA(LEFT)// move one word to the left
+#define MOVE_RIGHT_WD_M 	LA(RIGHT)// move one word to the right
+#define MOVE_LEFT_LINE_M 	LG(LEFT)// move to beginning of line
+#define MOVE_RIGHT_LINE_M 	LG(RIGHT)// move to end of line
+#define PASTE_NOSTYLE_M 	LG(LA(LS(V)))// paste without formatting
+#define MOVE_BEGIN_LINE_TERMINAL_M LS(HOME)// move to the beginning of the line in the terminal
+#define MOVE_END_LINE_TERMINAL_M LS(END)// move to the end of the line in the terminal
+
+#define CUT_M	LG(X)
+
+// encoder resolutions... 1 step can sometimes feel like half a click of the encoder, this makes sure it's at least 2 steps (1 click of the wheel)
 &left_encoder 	{ resolution = <2>; };
 &right_encoder 	{ resolution = <2>; };
 
 // make this behave like ignore-mod-tap-interrupt on QMK
-
 &mt {    
 	tapping-term-ms = <200>;
 	flavor = "tap-preferred";
 };
 
+// when using caps word, what should still be part of the 'word'?
 &caps_word {  
 	continue-list = <UNDERSCORE MINUS>;
 };
+
+// Templates:
 
 // transparent template for new layers
 //			bindings = <
@@ -38,7 +102,7 @@
 
 / {
 	    behaviors {
-            fast_shift: fast_shift {
+            fast_shift: fast_shift { // this is similar to permissive hold on QMK, better for shift in particular
                 compatible = "zmk,behavior-hold-tap";
                 label = "fast_shift";
                 #binding-cells = <2>;
@@ -47,7 +111,7 @@
                 flavor = "balanced";
                 bindings = <&kp>, <&kp>;
             };
-			right_layer_tap: right_layer_tap {
+			right_layer_tap: right_layer_tap { //layer-tap behavior, but switch layers on TAP, and send keypress on HOLD
                 compatible = "zmk,behavior-hold-tap";
                 label = "right_layer_tap";
                 #binding-cells = <2>;
@@ -61,17 +125,57 @@
             	label = "TAP_DANCE_LEFT_MAC";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
-            	bindings = <&kp LG(LEFT)>, <&kp CARET>;
+            	bindings = <&kp MOVE_LEFT_LINE_M>, <&kp CARET>;
         	};
 			td_right_mac: tap_dance_right_mac {
             	compatible = "zmk,behavior-tap-dance";
             	label = "TAP_DANCE_RIGHT_MAC";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
-            	bindings = <&kp LG(RIGHT)>, <&kp DOLLAR>;
+            	bindings = <&kp MOVE_RIGHT_LINE_M>, <&kp DOLLAR>;
+        	};
+			td_period_comma: td_period_comma {
+            	compatible = "zmk,behavior-tap-dance";
+            	label = "TAP_DANCE_PERIOD_COMMA";
+            	#binding-cells = <0>;
+            	tapping-term-ms = <200>;
+            	bindings = <&kp PERIOD>, <&kp COMMA>;
         	};
         };
 
+	macros {
+		vim_paste: vim_paste  {
+			label = "VIM_PASTE";
+			compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+			bindings
+                = <&macro_tap &kp DQT &kp PLUS &kp P>
+                ;
+		};
+		adot: adot  {
+			label = "A-with-umlaut";
+			compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+			bindings
+                = <&macro_press &kp LALT>,
+				<&macro_tap &kp U>,
+				<&macro_release &kp LALT>,
+				<&macro_tap &kp A>
+                ;
+		};
+		odot: odot  {
+			label = "O-with-umlaut";
+			compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+			bindings
+                = <&macro_press &kp LALT>,
+				<&macro_tap &kp U>,
+				<&macro_release &kp LALT>,
+				<&macro_tap &kp O>
+                ;
+		};
+
+	};
 
     combos {
         compatible = "zmk,combos";
@@ -104,13 +208,43 @@
 		combo_finder{
 			timeout-ms = <50>;
 			key-positions = <43 46>;
-			bindings = <&kp LG(LA(SPACE))>;
+			bindings = <&kp FINDER>;
 		};
 
 		combo_compose {
 			timeout-ms = <50>;
 			key-positions = <42 47>;
-			bindings = <&kp SLCK>;
+			bindings = <&kp COMPOSE_MAC>;
+		};
+
+		combo_calculator {
+			timeout-ms = <50>;
+			key-positions = <41 48>;
+			bindings = <&kp CALCULATOR>;
+		};
+
+		combo_vim_paste {
+			timeout-ms = <50>;
+			key-positions = <36 37>;
+			bindings = <&vim_paste>;
+		};
+
+		combo_acircle {
+			timeout-ms = <50>;
+			key-positions = <42 47 13>;
+			bindings = <&kp LA(A)>;
+		};
+
+		combo_adot {
+			timeout-ms = <50>;
+			key-positions = <42 47 21>;
+			bindings = <&adot>;
+		};
+
+		combo_odot {
+			timeout-ms = <50>;
+			key-positions = <42 47 22>;
+			bindings = <&odot>;
 		};
 
     };
@@ -118,17 +252,13 @@
 	keymap {
 		compatible = "zmk,keymap";
 
-		default_layer {
-// ---------------------------------------------------------------------------------------------------------------------------------
-// |  TAB  |  Q  |  W  |  E   |  R   |  T   |                                          |  Y   |  U    |  I    |  O   |   P   |   -  |
-// |  ESC  |  A  |  S  |  D   |  F   |  G   |                                          |  H   |  J    |  K    |  L   |   ;   |   '  |
-// | LAYER |  Z  |  X  |  C   |  V   |  B   | L SHIFT | L SHIFT |  | L SHIFT | L SHIFT |  N   |  M    |  ,    |  .   |   /   | LAYER |
-//                     | GUI  | LAYER()  | BSPC  |  ENTER  |   ESC   |  |   RET   |  LAYER  | SPACE  | LAYER  | R-ALT |
-			bindings = <
-	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                             &kp Y &kp U  &kp I  &kp O   &kp P    &kp MINUS
-	&kp ESC   &mt LCTRL A &mt LALT S &fast_shift LSHFT D &mt LGUI F &kp G                                           &kp H &mt RGUI J  &fast_shift RSHFT K  &mt RALT L   &mt RCTRL SEMI &kp SQT
-	&mt LC(LG(LS(LEFT))) LC(UP) &kp Z &kp X &kp C &kp V &kp B &caps_word &kp LSHFT        	&kp LSHFT &kp RALT &kp N &kp M &kp COMMA &kp DOT &kp FSLH &right_layer_tap LC(LG(LS(RIGHT))) NUMERICMASK
-	                 &kp LA(BSPC) &lt NUMS LPAR &kp BSPC &lt FNLAYER ENTER &kp LS(ENTER)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN
+		default_layer { // Mac-based with ctrl, alt, shift, gui order... linux preferred swaps ctrl and gui
+
+		bindings = <
+	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                                 &kp Y &kp U  &kp I  &kp O   &kp P    &kp MINUS
+	&kp ESC   &mt LCTRL A &mt LALT S &fast_shift LSHFT D &mt LGUI F &kp G                   &kp H &mt RGUI J  &fast_shift RSHFT K  &mt RALT L   &mt RCTRL SEMI &kp SQT
+	&mt WINDOW_LEFT SHOW_WINDOWS &kp Z &kp X &kp C &kp V &kp B &caps_word &kp LSHFT        	&kp LSHFT &kp RALT &kp N &kp M &kp COMMA &kp DOT &kp FSLH &right_layer_tap WINDOW_RIGHT NUMERICMASK
+	                 &kp DEL_WORD_M &lt NUMS LPAR &kp BSPC &lt FNLAYER ENTER &kp LS(ENTER)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN
 			>;
 
 			sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
@@ -137,20 +267,20 @@
 
 		numeric_layer {
 			bindings = <
-	&kp LG(LS(N4))   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT                                        &kp CARET &kp N7 &kp N8 &kp N9 &trans &kp PIPE 
+	&kp SCREENSHOT   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT                                        &kp CARET &kp N7 &kp N8 &kp N9 &trans &kp PIPE 
 	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &kp PLUS                                               &kp EQUAL   &kp N4 &kp N5 &kp N6 &kp BSLH &trans 
-	&kp LBRC   &kp LBKT &kp TILDE &kp GRAVE &kp LG(LA(LS(V))) &kp AMPS &trans &trans                  &trans &trans &trans &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
+	&kp LBRC   &kp LBKT &kp GRAVE &kp TILDE &kp PASTE_NOSTYLE_M &kp AMPS &trans &trans                  &trans &trans &trans &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
 	                 &trans &trans &trans &trans &trans        			&trans &trans &kp UNDERSCORE &kp N0 &kp C_MUTE
 			>;
 
-			sensor-bindings = <&inc_dec_kp LG(TAB) LG(LS(TAB)) &inc_dec_kp C_VOL_DN C_VOL_UP>;
+			sensor-bindings = <&inc_dec_kp APP_LEFT APP_RIGHT &inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 
 		numlock_layer {
 			bindings = <
-	&trans   &trans &trans &trans &trans &trans                                                &trans   &kp N7 &kp N8 &kp N9 &trans &trans 
-	&to DEFAULT   &trans &trans &trans &trans &trans                                               &trans   &kp N4 &kp N5 &kp N6 &trans &trans 
-	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &trans   &kp N1 &kp N2 &kp N3 &trans &trans 
+	&trans   &trans &trans &kp UP &trans &trans                                                &trans   &kp N7 &kp N8 &kp N9 &trans &trans 
+	&to DEFAULT   &trans &kp LEFT &kp DOWN &kp RIGHT &trans                                               &trans   &kp N4 &kp N5 &kp N6 &trans &trans 
+	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &td_period_comma   &kp N1 &kp N2 &kp N3 &trans &kp KP_NLCK 
 	                 &bt BT_SEL 0 &trans &trans &trans &trans                    &trans &trans &trans &kp N0 &trans
 			>;
 
@@ -159,24 +289,24 @@
 
 		textnav_layer {
 			bindings = <
-	&kp LC(LG(Q))   &kp PSCRN &kp LS(LC(LEFT)) &kp UP &kp LS(LC(RIGHT)) &td_left_mac                        &td_right_mac &kp PG_UP &kp LC(LG(SPACE)) &trans &trans &trans 
-	&to DEFAULT   &kp LA(LEFT) &kp LEFT &kp DOWN &kp RIGHT &kp LA(RIGHT)                                              &kp LEFT   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &kp CAPS 
-	&kp INS   &trans &kp LS(LA(LEFT)) &kp PG_DN &kp LS(LA(RIGHT))  &kp PG_UP &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &kp HOME &kp END &trans &trans 
-	                 &kp LG(X) &kp DEL &kp LA(BSPC) &trans &trans        				&trans &trans &trans &trans &kp LG(X)
+	&kp LOCK_SCREEN   &kp PSCRN &kp SELECT_LEFT_LINE_M &kp UP &kp SELECT_RIGHT_LINE_M &td_left_mac                        &td_right_mac &kp PG_UP &kp EMOJI_KBD &trans &trans &trans 
+	&to DEFAULT   &kp SELECT_LEFT_WD_M &kp LEFT &kp DOWN &kp RIGHT &kp SELECT_RIGHT_WD_M                                              &kp LEFT   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &kp CAPS 
+	&kp INS   &trans &kp MOVE_LEFT_WD_M &kp PG_DN &kp MOVE_RIGHT_WD_M  &kp PG_UP &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &kp HOME &kp END &trans &trans 
+	                 &kp CUT_M &kp DEL &kp DEL_WORD_M &trans &trans        				&trans &trans &trans &trans &kp CUT_M
 			>;
 
-			sensor-bindings = <&inc_dec_kp LS(LA(LEFT)) LS(LA(RIGHT)) &inc_dec_kp LS(UP) LS(DOWN)>;
+			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;
 		};
 
 			fn_layer {
 			bindings = <
-	&trans &trans &trans &trans &trans &trans                                              &kp F11 &kp F7 &kp F8 &kp F9 &kp F14 &trans
-	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &trans                             &kp F12 &kp F4 &kp F5 &kp F6 &kp F15 &trans 
-	&trans &trans &trans &trans &trans &trans &trans &trans                         &trans &trans &kp F13 &kp F1 &kp F2 &kp F3 &kp F16 &trans 
-	                 &trans &trans &trans &trans &trans        				&trans &trans &trans &trans &trans
+	&trans &trans &trans &trans &trans &kp MOVE_BEGIN_LINE_TERMINAL_M                      &kp MOVE_END_LINE_TERMINAL_M &kp F7 &kp F8 &kp F9 &kp F11 &trans
+	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &trans                             &trans &kp F4 &kp F5 &kp F6 &kp F12 &trans 
+	&trans &trans &kp MOVE_LEFT_TERMINAL &kp DEL_WORD_TERMINAL &kp MOVE_RIGHT_TERMINAL &trans &trans &trans                         &trans &trans &trans &kp F1 &kp F2 &kp F3 &trans &trans 
+	                 &trans &trans &trans &trans &trans        				&trans &trans &trans &kp F10 &trans
 			>;
 
-			sensor-bindings = <&inc_dec_kp LS(LA(LEFT)) LS(LA(RIGHT)) &inc_dec_kp LS(UP) LS(DOWN)>;
+			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;
 		};
 	};
 

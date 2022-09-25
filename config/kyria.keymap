@@ -149,7 +149,7 @@
 			compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
 			bindings
-                = <&macro_tap &kp DQT &kp PLUS &kp P>
+                = <&macro_tap &kp ESC &kp DQT &kp PLUS &kp P &kp I>
                 ;
 		};
 		adot: adot  {
@@ -300,10 +300,10 @@
 
 			fn_layer {
 			bindings = <
-	&trans &trans &trans &trans &trans &kp MOVE_BEGIN_LINE_TERMINAL_M                      &kp MOVE_END_LINE_TERMINAL_M &kp F7 &kp F8 &kp F9 &kp F11 &trans
+	&trans &kp LBRC &kp LBKT &kp RBKT &kp RBRC &kp MOVE_BEGIN_LINE_TERMINAL_M                      &kp MOVE_END_LINE_TERMINAL_M &kp F7 &kp F8 &kp F9 &kp F11 &trans
 	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &trans                             &trans &kp F4 &kp F5 &kp F6 &kp F12 &trans 
 	&trans &trans &kp MOVE_LEFT_TERMINAL &kp DEL_WORD_TERMINAL &kp MOVE_RIGHT_TERMINAL &trans &trans &trans                         &trans &trans &trans &kp F1 &kp F2 &kp F3 &trans &trans 
-	                 &trans &trans &trans &trans &trans        				&trans &trans &trans &kp F10 &trans
+	                 &trans &trans &trans &trans &trans        				&trans &kp HASH &trans &kp F10 &trans
 			>;
 
 			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;

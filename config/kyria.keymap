@@ -143,28 +143,28 @@
         	};
 			td_left_sel: td_left_sel {
             	compatible = "zmk,behavior-tap-dance";
-            	label = "TAP_DANCE_PERIOD_COMMA";
+            	label = "TAP_DANCE_LEFT_SELECT";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
             	bindings = <&kp SELECT_LEFT_WD_M >, <&kp SELECT_LEFT_LINE_M>;
         	};
 			td_right_sel: td_right_sel {
             	compatible = "zmk,behavior-tap-dance";
-            	label = "TAP_DANCE_PERIOD_COMMA";
+            	label = "TAP_DANCE_RIGHT_SELECT";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
             	bindings = <&kp SELECT_RIGHT_WD_M>, <&kp SELECT_RIGHT_LINE_M>;
         	};
 			td_left_term: td_left_term {
             	compatible = "zmk,behavior-tap-dance";
-            	label = "TAP_DANCE_PERIOD_COMMA";
+            	label = "TAP_DANCE_LEFT_TERMINAL";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
             	bindings = <&kp MOVE_LEFT_TERMINAL >, <&kp MOVE_BEGIN_LINE_TERMINAL_M>;
         	};
 			td_right_term: td_right_term {
             	compatible = "zmk,behavior-tap-dance";
-            	label = "TAP_DANCE_PERIOD_COMMA";
+            	label = "TAP_DANCE_RIGHT_TERMINAL";
             	#binding-cells = <0>;
             	tapping-term-ms = <200>;
             	bindings = <&kp MOVE_RIGHT_TERMINAL>, <&kp MOVE_END_LINE_TERMINAL_M>;

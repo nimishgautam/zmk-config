@@ -286,8 +286,8 @@
 	                 &kp DEL_WORD_M &kp LS(ENTER) &lt NUMS LPAR &kp BSPC &lt FNLAYER ENTER         						  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp UNDERSCORE &kp PG_DN
 			>;
 
-			//sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
-			sensor-bindings = <&inc_dec_kp MOVE_LEFT_WD_M MOVE_RIGHT_WD_M &inc_dec_mwh SCROLL_DOWN SCROLL_UP>;
+			sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
+			//sensor-bindings = <&inc_dec_kp MOVE_LEFT_WD_M MOVE_RIGHT_WD_M &inc_dec_mwh SCROLL_DOWN SCROLL_UP>;
 		};
 
 

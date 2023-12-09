@@ -286,7 +286,8 @@
 	                 &kp DEL_WORD_M &kp LS(ENTER) &lt NUMS LPAR &kp BSPC &lt FNLAYER ENTER         						  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp UNDERSCORE &kp PG_DN
 			>;
 
-			sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
+			//sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
+			sensor-bindings = <&inc_dec_kp MOVE_LEFT_WD_M MOVE_RIGHT_WD_M &inc_dec_mwh SCROLL_DOWN SCROLL_UP>;
 		};
 
 
@@ -294,7 +295,7 @@
 			bindings = <
 	&kp SCREENSHOT   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT                                        &kp CARET &kp N7 &kp N8 &kp N9 &trans &kp PIPE 
 	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &kp PLUS                                               &kp EQUAL   &kp N4 &kp N5 &kp N6 &kp BSLH &trans 
-	&kp LBRC   &kp LBKT &kp GRAVE &kp TILDE &kp PASTE_NOSTYLE_M &kp AMPS &trans &trans                  &trans &trans &trans &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
+	&kp LBRC   &kp LBKT &kp GRAVE &kp TILDE &kp PASTE_NOSTYLE_M &kp AMPS &trans &trans                  &trans &trans &td_period_comma &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
 	                 &trans &trans &trans &trans &trans        			 &trans &kp UNDERSCORE &kp N0 &trans &kp C_MUTE
 			>;
 
@@ -304,11 +305,11 @@
 		numlock_layer {
 			bindings = <
 	&trans   &trans &trans &kp UP &trans &trans                                                &trans   &kp N7 &kp N8 &kp N9 &trans &trans 
-	&to DEFAULT   &trans &kp LEFT &kp DOWN &kp RIGHT &trans                                               &trans   &kp N4 &kp N5 &kp N6 &trans &trans 
-	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &td_period_comma   &kp N1 &kp N2 &kp N3 &trans &kp KP_NLCK 
+	&to DEFAULT   &trans &kp LEFT &kp DOWN &kp RIGHT &trans                                               &trans   &kp N4 &kp N5 &kp N6 &trans &kp KP_NLCK 
+	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &td_period_comma   &kp N1 &kp N2 &kp N3 &trans &trans
 	                 &bt BT_SEL 0 &trans &trans &trans &trans                    &trans &trans &kp N0 &trans &trans
 			>;
-
+			// just here because I don't know what happens if I don't put them in here
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
 		};
 

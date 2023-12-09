@@ -75,9 +75,6 @@
 
 #define CUT_M	LG(X)
 
-// encoder resolutions... 1 step can sometimes feel like half a click of the encoder, this makes sure it's at least 2 steps (1 click of the wheel)
-&left_encoder 	{ resolution = <2>; };
-&right_encoder 	{ resolution = <2>; };
 
 // make this behave like ignore-mod-tap-interrupt on QMK
 &mt {    
@@ -286,7 +283,7 @@
 	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                                 &kp Y &kp U  &kp I  &kp O   &kp P    &kp MINUS
 	&kp ESC   &mt LCTRL A &mt LALT S &fast_shift LSHFT D &mt LGUI F &kp G                   &kp H &mt RGUI J  &fast_shift RSHFT K  &mt RALT L   &mt RCTRL SEMI &kp SQT
 	&mt WINDOW_LEFT SHOW_WINDOWS &kp Z &kp X &kp C &kp V &kp B &td_left_sel &td_left_term         	&td_right_term &td_right_sel &kp N &kp M &kp COMMA &kp DOT &kp FSLH &right_layer_tap WINDOW_RIGHT NUMERICMASK
-	                 &kp DEL_WORD_M &lt NUMS LPAR &kp BSPC &lt FNLAYER ENTER &kp LS(ENTER)        						&kp UNDERSCORE  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp PG_DN
+	                 &kp DEL_WORD_M &kp LS(ENTER) &lt NUMS LPAR &kp BSPC &lt FNLAYER ENTER         						  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp UNDERSCORE &kp PG_DN
 			>;
 
 			sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
@@ -298,7 +295,7 @@
 	&kp SCREENSHOT   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT                                        &kp CARET &kp N7 &kp N8 &kp N9 &trans &kp PIPE 
 	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &kp PLUS                                               &kp EQUAL   &kp N4 &kp N5 &kp N6 &kp BSLH &trans 
 	&kp LBRC   &kp LBKT &kp GRAVE &kp TILDE &kp PASTE_NOSTYLE_M &kp AMPS &trans &trans                  &trans &trans &trans &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
-	                 &trans &trans &trans &trans &trans        			&trans &trans &kp UNDERSCORE &kp N0 &kp C_MUTE
+	                 &trans &trans &trans &trans &trans        			 &trans &kp UNDERSCORE &kp N0 &trans &kp C_MUTE
 			>;
 
 			sensor-bindings = <&inc_dec_kp APP_LEFT APP_RIGHT &inc_dec_kp C_VOL_DN C_VOL_UP>;
@@ -309,7 +306,7 @@
 	&trans   &trans &trans &kp UP &trans &trans                                                &trans   &kp N7 &kp N8 &kp N9 &trans &trans 
 	&to DEFAULT   &trans &kp LEFT &kp DOWN &kp RIGHT &trans                                               &trans   &kp N4 &kp N5 &kp N6 &trans &trans 
 	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &td_period_comma   &kp N1 &kp N2 &kp N3 &trans &kp KP_NLCK 
-	                 &bt BT_SEL 0 &trans &trans &trans &trans                    &trans &trans &trans &kp N0 &trans
+	                 &bt BT_SEL 0 &trans &trans &trans &trans                    &trans &trans &kp N0 &trans &trans
 			>;
 
 			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
@@ -320,7 +317,7 @@
 	&kp LOCK_SCREEN   &kp PSCRN &kp SELECT_LEFT_LINE_M &kp UP &kp SELECT_RIGHT_LINE_M &td_left_mac                        &td_right_mac &kp PG_UP &kp EMOJI_KBD &trans &trans &trans 
 	&to DEFAULT   &kp SELECT_LEFT_WD_M &kp LEFT &kp DOWN &kp RIGHT &kp SELECT_RIGHT_WD_M                                              &kp LEFT   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &kp CAPS 
 	&kp INS   &trans &kp MOVE_LEFT_WD_M &kp PG_DN &kp MOVE_RIGHT_WD_M  &kp PG_UP &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &kp HOME &kp END &trans &trans 
-	                 &kp CUT_M &kp DEL &kp DEL_WORD_M &trans &trans        				&trans &trans &trans &trans &kp CUT_M
+	                 &kp CUT_M &trans &kp DEL &kp DEL_WORD_M &trans         				&trans &trans &trans &trans &kp CUT_M
 			>;
 
 			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;
@@ -331,7 +328,7 @@
 	&trans &kp LBRC &kp LBKT &kp RBKT &kp RBRC &kp MOVE_BEGIN_LINE_TERMINAL_M                      &kp MOVE_END_LINE_TERMINAL_M &kp F7 &kp F8 &kp F9 &kp F11 &trans
 	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &trans                             &trans &kp F4 &kp F5 &kp F6 &kp F12 &trans 
 	&trans &trans &kp MOVE_LEFT_TERMINAL &kp DEL_WORD_TERMINAL &kp MOVE_RIGHT_TERMINAL &trans &trans &trans                         &trans &trans &trans &kp F1 &kp F2 &kp F3 &trans &trans 
-	                 &trans &trans &trans &trans &trans        				&trans &kp HASH &trans &kp F10 &trans
+	                 &trans &trans &trans &trans &trans        				 &kp HASH &trans &kp F10 &trans &trans
 			>;
 
 			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;

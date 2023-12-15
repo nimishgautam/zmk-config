@@ -11,9 +11,10 @@
 
 #define DEFAULT 	0
 #define NUMS   		1
-#define NUMERICMASK   	2
-#define TEXTNAV   	3
-#define FNLAYER   	4
+#define TEXTNAV   	2
+#define FNKEYS   	3
+#define TERMKEYS   	4
+#define ADJUST		5
 
 // Key defines for easier reading
 
@@ -30,6 +31,10 @@
 #define APP_LEFT		LG(TAB)
 #define APP_RIGHT		LS(LG(TAB))
 #define CALCULATOR      RS(LG(LC(FSLH))) // arbitrary shortcut
+#define ZOOM_IN         LA(LG(EQUAL)) // mac code zoom in
+#define ZOOM_OUT        LA(LG(MINUS)) // mac code zoom out
+#define SWITCH_APP_WINDOWS LC(GRAVE) //mac code
+#define OPEN_TERMINAL_HERE LC(F10)
 
 // Terminal Shortcuts, should be the same in mac and linux
 
@@ -53,6 +58,14 @@
 #define PASTE_NOSTYLE_L 	LC(LS(V))// paste without formatting
 #define MOVE_BEGIN_LINE_TERMINAL_L HOME// move to the beginning of the line in the terminal
 #define MOVE_END_LINE_TERMINAL_L END// move to the end of the line in the terminal
+
+// Linux-only
+#define MAX_VERTICAL LC(LG(RS(F8)))
+#define MAX_HORIZONTAL LC(LG(RS(F6)))
+#define TOG_WINDOW_STATE LA(F10)
+#define SEND_WINDOW_LEFT RS(LC(LEFT))
+#define SEND_WINDOW_RIGHT RS(LC(RIGHT))
+
 
 #define CUT_L	LC(X)
 // Mac-based
@@ -232,72 +245,107 @@
 
     combos {
         compatible = "zmk,combos";
-        combo_left {
-            timeout-ms = <50>;
-            key-positions = <30 43>;
-            bindings = <&kp LEFT>;
-        };
-		combo_right {
-            timeout-ms = <50>;
-            key-positions = <31 44>;
-            bindings = <&kp RIGHT>;
-        };
-		combo_down {
-            timeout-ms = <50>;
-            key-positions = <32 45>;
-            bindings = <&kp DOWN>;
-        };
-		combo_up {
-            timeout-ms = <50>;
-            key-positions = <33 46>;
-            bindings = <&kp UP>;
-        };
+
 		combo_bt_clear {
-            timeout-ms = <50>;
+            timeout-ms = <30>;
             key-positions = <30 31 32 33>;
             bindings = <&bt BT_CLR>;
         };
 
 		combo_finder{
-			timeout-ms = <50>;
+			timeout-ms = <30>;
 			key-positions = <43 46>;
 			bindings = <&kp FINDER>;
 		};
 
 		combo_compose {
-			timeout-ms = <50>;
+			timeout-ms = <30>;
 			key-positions = <42 47>;
 			bindings = <&kp COMPOSE_MAC>;
 		};
 
 		combo_calculator {
-			timeout-ms = <50>;
+			timeout-ms = <30>;
 			key-positions = <41 48>;
 			bindings = <&kp CALCULATOR>;
 		};
 
 		combo_vim_paste {
-			timeout-ms = <50>;
+			timeout-ms = <30>;
 			key-positions = <36 37>;
 			bindings = <&vim_paste>;
 		};
 
 		combo_acircle {
-			timeout-ms = <50>;
+			timeout-ms = <30>;
 			key-positions = <42 47 13>;
 			bindings = <&kp LA(A)>;
 		};
 
 		combo_adot {
-			timeout-ms = <50>;
+			timeout-ms = <30>;
 			key-positions = <42 47 21>;
 			bindings = <&adot>;
 		};
 
 		combo_odot {
-			timeout-ms = <50>;
+			timeout-ms = <30>;
 			key-positions = <42 47 22>;
 			bindings = <&odot>;
+		};
+
+		combo_plus {
+			timeout-ms = <30>;
+			key-positions = <8 7>;
+			bindings = <&kp PLUS>;
+		};		
+		
+		combo_equals {
+			timeout-ms = <30>;
+			key-positions = <8 9>;
+			bindings = <&kp EQUAL>;
+		};
+		
+		combo_ampersand {
+			timeout-ms = <30>;
+			key-positions = <17 18>;
+			bindings = <&kp AMPS>;
+		};
+		
+		combo_underscore {
+			timeout-ms = <30>;
+			key-positions = <20 40>;
+			bindings = <&kp UNDERSCORE>;
+		};
+
+		combo_scrollup {
+			timeout-ms = <30>;
+			key-positions = <2 3>;
+			bindings = <&mwh SCROLL_UP>;
+		};
+		
+		combo_scrolldown {
+			timeout-ms = <30>;
+			key-positions = <27 28>;
+			bindings = <&mwh SCROLL_DOWN>;
+		};
+		
+		combo_scrollleft {
+			timeout-ms = <30>;
+			key-positions = <14 15>;
+			bindings = <&mwh SCROLL_LEFT>;
+		};
+		
+		combo_scrollright {
+			timeout-ms = <30>;
+			key-positions = <15 16>;
+			bindings = <&mwh SCROLL_RIGHT>;
+		};
+		
+		combo_emoji {
+			timeout-ms = <30>;
+			key-positions = <3 8>;
+			bindings = <&kp EMOJI_KBD>;
 		};
 
     };
@@ -308,10 +356,10 @@
 		default_layer { // Mac-based with ctrl, alt, shift, gui order... linux preferred swaps ctrl and gui
 
 		bindings = <
-	&kp TAB   &kp Q &kp W &kp E &kp R &kp T                                                 &kp Y &kp U  &kp I  &kp O   &kp P    &kp MINUS
+	&kp TAB   &kp Q  &kp W &kp E  &kp R &kp T                                                 &kp Y &kp U  &kp I  &kp O   &kp P    &kp MINUS
 	&kp ESC   &mt LCTRL A &mt LALT S &fast_shift LSHFT D &mt LGUI F &kp G                   &kp H &mt RGUI J  &fast_shift RSHFT K  &mt RALT L   &mt RCTRL SEMI &kp SQT
-	&mt WINDOW_LEFT SHOW_WINDOWS &kp Z &kp X &kp C &kp V &kp B &td_left_sel &td_left_term         	&td_right_term &td_right_sel &kp N &kp M &kp COMMA &kp DOT &kp FSLH &right_layer_tap WINDOW_RIGHT NUMERICMASK
-	                 &kp DEL_WORD_M &kp LS(ENTER) &lt NUMS LPAR &kp BSPC &lt FNLAYER ENTER         						  &lt TEXTNAV STAR  &kp SPACE &lt NUMS RPAR &kp UNDERSCORE &kp PG_DN
+	&mt WINDOW_LEFT SHOW_WINDOWS &kp Z &kp X &kp C &kp V &kp B &td_left_sel &td_left_term         	&td_right_term &td_right_sel &kp N &kp M &kp COMMA &kp DOT &kp FSLH &right_layer_tap WINDOW_RIGHT NUMS
+	                 &kp DEL_WORD_M &kp LS(ENTER) &lt FNKEYS LPAR &kp BSPC &lt NUMS ENTER         						  &lt TEXTNAV STAR  &kp SPACE &lt TERMKEYS RPAR &kp UNDERSCORE &kp PG_DN
 			>;
 
 			//sensor-bindings = <&inc_dec_kp LEFT RIGHT &inc_dec_kp UP DOWN>;
@@ -319,50 +367,60 @@
 			sensor-bindings = <&inc_dec_kp MOVE_LEFT_WD_M MOVE_RIGHT_WD_M &inc_dec_mwh SCROLL_DOWN SCROLL_UP>;
 		};
 
-
 		numeric_layer {
 			bindings = <
-	&kp SCREENSHOT   &kp EXCL &kp AT &kp HASH &kp DOLLAR &kp PERCENT                                        &kp CARET &kp N7 &kp N8 &kp N9 &trans &kp PIPE 
-	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &kp PLUS                                               &kp EQUAL   &kp N4 &kp N5 &kp N6 &kp BSLH &trans 
-	&kp LBRC   &kp LBKT &kp GRAVE &kp TILDE &kp PASTE_NOSTYLE_M &kp AMPS &trans &trans                  &trans &trans &td_period_comma &kp N1 &kp N2 &kp N3 &kp RBKT &kp RBRC 
-	                 &trans &trans &trans &trans &trans        			 &trans &kp UNDERSCORE &kp N0 &trans &kp C_MUTE
+	&trans   &trans &kp LBRC &kp RBRC &trans &trans                                                         &kp CARET &kp N7 &kp N8 &kp N9 &trans &kp PIPE 
+	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &trans                                              &kp ENTER   &kp N4 &kp N5 &kp N6 &kp BSLH &kp KP_NLCK 
+	&kp LOCK_SCREEN   &trans &trans &trans &trans &trans &trans &trans                  &trans &trans &td_period_comma &kp N1 &kp N2 &kp N3 &kp FSLH &trans 
+	                 &trans &trans &trans &trans &kp ENTER        			 &kp HASH &kp UNDERSCORE &kp N0 &trans &kp C_MUTE
 			>;
 
 			sensor-bindings = <&inc_dec_kp APP_LEFT APP_RIGHT &inc_dec_kp C_VOL_DN C_VOL_UP>;
 		};
 
-		numlock_layer {
-			bindings = <
-	&trans   &trans &trans &kp UP &trans &trans                                                &trans   &kp N7 &kp N8 &kp N9 &trans &trans 
-	&to DEFAULT   &trans &kp LEFT &kp DOWN &kp RIGHT &trans                                               &trans   &kp N4 &kp N5 &kp N6 &trans &kp KP_NLCK 
-	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &td_period_comma   &kp N1 &kp N2 &kp N3 &trans &trans
-	                 &bt BT_SEL 0 &trans &trans &trans &trans                    &trans &trans &kp N0 &trans &trans
-			>;
-			// just here because I don't know what happens if I don't put them in here
-			sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp PG_UP PG_DN>;
-		};
-
 		textnav_layer {
 			bindings = <
-	&kp LOCK_SCREEN   &kp PSCRN &kp SELECT_LEFT_LINE_M &kp UP &kp SELECT_RIGHT_LINE_M &td_left_mac                        &td_right_mac &kp PG_UP &kp EMOJI_KBD &trans &trans &trans 
-	&to DEFAULT   &kp SELECT_LEFT_WD_M &kp LEFT &kp DOWN &kp RIGHT &kp SELECT_RIGHT_WD_M                                              &kp LEFT   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &kp CAPS 
-	&kp INS   &trans &kp MOVE_LEFT_WD_M &kp PG_DN &kp MOVE_RIGHT_WD_M  &kp PG_UP &trans &trans                         &trans &trans &kp RIGHT   &kp PG_DN &kp HOME &kp END &trans &trans 
-	                 &kp CUT_M &trans &kp DEL &kp DEL_WORD_M &trans         				&trans &trans &trans &trans &kp CUT_M
+	&kp SCREENSHOT   &kp EXCL &kp AT &kp UP &kp DOLLAR &kp PERCENT                        &trans &trans &kp LBRC &kp RBRC &trans &trans 
+	&to DEFAULT   &kp SELECT_LEFT_LINE_M &kp LEFT &kp DOWN &kp RIGHT &kp END                             &trans   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &kp CAPS 
+	&kp INS   &kp DEL &kp GRAVE &kp TILDE &kp PASTE_NOSTYLE_M  &kp HOME &trans &trans                         &trans &trans &trans   &trans &trans &trans &trans &to ADJUST 
+	                 &kp CUT_M &trans &kp PG_UP &kp DEL_WORD_M &kp PG_DN         				&trans &trans &trans &trans &kp CUT_M
 			>;
 
 			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;
 		};
 
-			fn_layer {
+		fn_layer {
 			bindings = <
-	&trans &kp LBRC &kp LBKT &kp RBKT &kp RBRC &kp MOVE_BEGIN_LINE_TERMINAL_M                      &kp MOVE_END_LINE_TERMINAL_M &kp F7 &kp F8 &kp F9 &kp F11 &trans
-	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &trans                             &trans &kp F4 &kp F5 &kp F6 &kp F12 &trans 
-	&trans &trans &kp MOVE_LEFT_TERMINAL &kp DEL_WORD_TERMINAL &kp MOVE_RIGHT_TERMINAL &trans &trans &trans                         &trans &trans &trans &kp F1 &kp F2 &kp F3 &trans &trans 
-	                 &trans &trans &trans &trans &trans        				 &kp HASH &trans &kp F10 &trans &trans
+	&trans &trans &trans &kp TOG_WINDOW_STATE &trans &trans                              &td_right_mac &kp F7 &kp F8 &kp F9 &kp F11 &kp PSCRN
+	&to DEFAULT   &kp LCTRL &kp LALT &kp LSHFT &kp LGUI &trans                             &kp MAX_VERTICAL &kp F4 &kp F5 &kp F6 &kp F12 &kp SLCK 
+	&trans &trans &trans &trans &trans &trans &trans &trans                         &trans &trans &kp MAX_HORIZONTAL &kp F1 &kp F2 &kp F3 &trans &kp SEND_WINDOW_RIGHT
+	                 &trans &trans &trans &trans &trans        				 &kp ZOOM_IN &kp ZOOM_OUT &kp F10 &trans &trans
 			>;
 
 			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;
 		};
+
+		terminal_layer {
+			bindings = <
+	&trans &trans &trans &kp MOVE_BEGIN_LINE_TERMINAL_M &trans &td_left_mac                                                              &trans &trans &kp OPEN_TERMINAL_HERE &trans &trans &trans
+	&to DEFAULT   &kp SELECT_LEFT_WD_M &kp MOVE_LEFT_TERMINAL &kp MOVE_END_LINE_TERMINAL_M &kp MOVE_RIGHT_TERMINAL &kp SELECT_RIGHT_WD_M                             &trans &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &trans 
+	&kp SEND_WINDOW_LEFT &trans &trans &trans &trans &trans &trans &trans                         &trans &trans &trans &trans &trans &trans &trans &trans 
+	                 &trans &trans &trans &kp DEL_WORD_TERMINAL  &trans        				 &trans &trans &trans &trans &trans
+			>;
+
+			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;
+		};
+
+		adjust_layer {
+					bindings = <
+	&trans   &trans &trans &trans &trans &trans                                                &trans   &trans &trans &trans &trans &trans 
+	&to DEFAULT   &trans &trans &trans &trans &trans                                               &trans   &trans &trans &trans &trans &trans 
+	&trans   &trans &trans &trans &trans &trans &bt BT_SEL 1 &bt BT_SEL 2        &bt BT_SEL 3 &bt BT_SEL 4 &trans   &trans &trans &trans &trans &trans 
+	                 &bt BT_SEL 0 &trans &trans &trans &trans                    &trans &trans &trans &trans &trans
+			>;
+			sensor-bindings = <&inc_dec_kp SELECT_LEFT_WD_M SELECT_RIGHT_WD_M &inc_dec_kp LS(UP) LS(DOWN)>;
+		};
+
 	};
 
 	};

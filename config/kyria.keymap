@@ -382,7 +382,7 @@
 			bindings = <
 	&kp SCREENSHOT   &kp EXCL &kp AT &kp UP &kp DOLLAR &kp PERCENT                        &trans &trans &kp LBRC &kp RBRC &trans &trans 
 	&to DEFAULT   &kp SELECT_LEFT_LINE_M &kp LEFT &kp DOWN &kp RIGHT &kp END                             &trans   &kp RGUI &kp RSHFT &kp RALT &kp RCTRL &kp CAPS 
-	&kp INS   &kp DEL &kp GRAVE &kp TILDE &kp PASTE_NOSTYLE_M  &kp HOME &trans &trans                         &trans &trans &trans   &trans &trans &trans &trans &to ADJUST 
+	&kp INS   &kp DEL &kp TILDE &kp GRAVE &kp PASTE_NOSTYLE_M  &kp HOME &trans &trans                         &trans &trans &trans   &trans &trans &trans &trans &to ADJUST 
 	                 &kp CUT_M &trans &kp PG_UP &kp DEL_WORD_M &kp PG_DN         				&trans &trans &trans &trans &kp CUT_M
 			>;
 
